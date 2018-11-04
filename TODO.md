@@ -2,7 +2,7 @@
 
 [Ulysses API](https://ulysses.app/kb/x-callback-url/) documentation.
 
-Use ISO YYYY-MM-04Thh-mm format to name entries
+Use ISO YYYY-MM-04Thh:mm format to name entries
 
 ## To do
 
