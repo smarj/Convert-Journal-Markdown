@@ -1,24 +1,22 @@
 #!/usr/bin/env ruby
 
 require 'json'
-require 'net/http'
-require 'open-uri'
 
 def title(date) 
 	return date.strftime('%Y-%m-%dT%H:%M')
 end
 
-def UlSend(action, params)
-	uri = URI("ulysses://x-callback-url/#{action}?" + URI.encode_www_form(params))
-	puts uri.to_s
-	URI.parse(uri).open { |f|
-		puts f.uri
-		puts f.code
-	}
+
+if ARGV.size != 1 
+	puts "Please specify a JSON file to process on the command line."
+	exit(1)
 end
 
-def UlNewSheet(text)
-	UlSend("new-sheet", { :text => URI.encode(text) })
-end
+puts "#{ARGV[0]}"
 
-UlNewSheet('This is a new sheet from Ruby')
+serialized = File.read(ARGV[0])
+journal = JSON.parse(serialized)
+
+journal['entries'].each { |entry|
+	puts entry['creationDate'], entry['timeZone']
+}
