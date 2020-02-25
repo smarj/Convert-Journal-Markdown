@@ -35,5 +35,7 @@ journal['entries'].each { |entry|
 	FileUtils.mkdir_p "#{year}/#{month}"
 
 	puts "Writing #{fpath}"
-	File.write(​fpath​, ​entry['text'])
+	File.open(fpath,'w') { |f|
+		f.write(entry['text'])
+	}
 }
